@@ -45,14 +45,14 @@ namespace TicTacToe
         public void FirstUpdate()
         {
             this.Draw();
-            
+
             do
             {
                 Console.WriteLine("First Player: Enter coordinates:\nOx from 0 to 2");
                 FirstPlayer.Ox = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Oy from 0 to 2"); 
+                Console.WriteLine("Oy from 0 to 2");
                 FirstPlayer.Oy = Convert.ToInt32(Console.ReadLine());
-            } while ((FirstPlayer.Ox > 2 || FirstPlayer.Ox < 0) && (FirstPlayer.Oy > 2 || FirstPlayer.Oy < 0));
+            } while (Checking(FirstPlayer.Ox, FirstPlayer.Oy));
 
             Field[FirstPlayer.Ox, FirstPlayer.Oy] = FirstPlayer.Skin;
         }
@@ -72,9 +72,20 @@ namespace TicTacToe
                 SecondPlayer.Ox = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Oy from 0 to 2");
                 SecondPlayer.Oy = Convert.ToInt32(Console.ReadLine());
-            } while ((SecondPlayer.Ox > 2 || SecondPlayer.Ox < 0) && (SecondPlayer.Oy > 2 || SecondPlayer.Oy < 0));
+            } while (Checking(SecondPlayer.Ox, SecondPlayer.Oy));
 
             Field[SecondPlayer.Ox, SecondPlayer.Oy] = SecondPlayer.Skin;
+        }
+
+        public bool Checking(int x, int y)
+        {
+            if (0 <= x && x <= 2 && 0 <= y && y <= 2)
+            {
+                if (Field[x, y] == FirstPlayer.Skin || Field[x, y] == SecondPlayer.Skin)
+                    return true;
+                else return false;
+            }
+            else return true;
         }
 
         public void Draw()
